@@ -1,0 +1,13 @@
+---
+ targets: 
+  - name: "fact_dim_df"
+    type: "orc"
+    mode: "overwrite"
+    path: "examples/pipebathing/data/fact_dim_tbl/"
+  - name: "agg_df"
+    type: "orc"
+    mode: "overwrite"
+    path: "examples/pipebathing/data/agg_tbl/"
+  # - name: "test"
+  #   type: "bigquery"
+  #   table: "test"

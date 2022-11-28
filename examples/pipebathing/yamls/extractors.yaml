@@ -1,0 +1,17 @@
+---
+ sources: 
+  - name: "author"
+    type: "orc"
+    path: "examples/pipebathing/data/author/"
+  - name: "book"
+    type: "orc"
+    path: "examples/pipebathing/data/book/"
+  - name: "editor"
+    type: "orc"
+    path: "examples/pipebathing/data/editor/"
+  - name: "translator"
+    type: "orc"
+    path: "examples/pipebathing/data/translator/"
+  # - name: "test"
+  #   type: "bigquery"
+  #   query: "select * from test"

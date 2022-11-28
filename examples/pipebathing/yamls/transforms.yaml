@@ -1,0 +1,31 @@
+---
+ steps:
+  - query: "SELECT 
+            b.id, 
+            b.title, 
+            a.first_name AS author_first_name,
+            a.last_name AS author_last_name, 
+            e.last_name AS editor,
+            b.type AS type,
+            case when t.last_name is null then 0 else t.last_name end AS translator,
+            CONCAT(a.first_name, ' ', a.last_name) AS full_name,
+            RANK() OVER (PARTITION BY b.type ORDER BY e.first_name DESC) AS seq
+        FROM book b
+        LEFT JOIN author a
+        ON b.author_id = a.id
+        LEFT JOIN editor e
+        ON b.editor_id = e.id
+        LEFT JOIN translator t
+        ON b.translator_id = t.id
+        ORDER BY b.type, e.first_name desc"
+    name: "fact_dim_df"
+    share_df: ["fact_dim_df"]
+
+  - query: "SELECT 
+            seq,
+            count(*) as cnt
+        FROM fact_dim_df
+        GROUP BY seq
+        ORDER BY seq, cnt"
+    name: "agg_df"
+    share_df: ["agg_df"]
